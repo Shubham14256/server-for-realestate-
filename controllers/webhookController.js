@@ -116,7 +116,12 @@ router.post("/", async (req, res) => {
       return reply(res, MESSAGES.fallback);
     }
 
-    const text = incomingText.toLowerCase();
+    const text = incomingText.toLowerCase()
+      .replace("1️⃣", "1")
+      .replace("2️⃣", "2")
+      .replace("3️⃣", "3")
+      .replace("4️⃣", "4")
+      .trim();
     const session = sessions.get(phone);
 
     // -----------------------------------------------------------------------
