@@ -95,16 +95,20 @@ Or type *Hi* to restart.`,
 // ---------------------------------------------------------------------------
 router.post("/", async (req, res) => {
   try {
+    console.log(`📩 RAW BODY:`, JSON.stringify(req.body));
+
     // AutoResponder sends the message in req.body
     // Common fields: { message, sender, ... } — adjust key if your app differs
     const incomingText = (
       req.body.message ||
       req.body.text ||
       req.body.body ||
+      req.body.content ||
+      req.body.msg ||
       ""
     ).trim();
 
-    const phone = req.body.sender || req.body.from || "unknown";
+    const phone = req.body.sender || req.body.from || req.body.phone || "unknown";
 
     console.log(`📩 [${phone}]: ${incomingText}`);
 
